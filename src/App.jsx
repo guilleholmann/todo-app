@@ -1,8 +1,8 @@
 
-import { Heading, IconButton, VStack, useColorMode, useDisclosure, useToast, Link, Flex } from "@chakra-ui/react";
+import { Heading, IconButton, VStack, useColorMode } from "@chakra-ui/react";
 import { FaSun, FaMoon } from 'react-icons/fa'
 import { useState, useEffect } from 'react'
-
+import AddTask from './components/AddTask';
 import './App.css'
 
 function App() {
@@ -28,9 +28,12 @@ function App() {
         size='xl'
         bgGradient='linear(to-l, teal.300, blue.500)'
         bgClip='text' 
+        justifyContent="flex-start"
       >
         TODO
       </Heading>
+
+      <AddTask />
     </VStack>
 
   )
