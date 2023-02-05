@@ -2,11 +2,29 @@
 import { Heading, IconButton, VStack, useColorMode } from "@chakra-ui/react";
 import { FaSun, FaMoon } from 'react-icons/fa'
 import { useState, useEffect } from 'react'
-import AddTask from './components/AddTask';
+import AddTodo from './components/AddTodo';
+import TodoList from "./components/TodoList";
 import './App.css'
 
 function App() {
 
+  const [todoList, setTodoList] = useState([]);
+
+  function checkTodo(id){
+        
+    const newTodosCheck = todoList.map((todo) => {
+        if (todo.id === id){
+           todo.check = !todo.check;
+        }
+        return todo;
+    });
+
+    setTodoList(newTodosCheck);
+  }
+
+  function addTodo(todo){
+    setTodoList([...todoList, todo]);
+}
 
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -26,14 +44,17 @@ function App() {
         as='h1'
         fontWeight='extrabold'
         size='xl'
-        bgGradient='linear(to-l, teal.300, blue.500)'
+       
         bgClip='text' 
         justifyContent="flex-start"
+        color="green"
       >
         TODO
       </Heading>
+      <AddTodo  addTodo={addTodo}/>
+      <TodoList todoList={todoList}  checkTodo={checkTodo}/>
 
-      <AddTask />
+      
     </VStack>
 
   )
