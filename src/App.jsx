@@ -47,7 +47,7 @@ function App() {
        
         bgClip='text' 
         justifyContent="flex-start"
-        color="green"
+        color="blue.300"
       >
         TODO
       </Heading>

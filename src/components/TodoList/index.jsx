@@ -4,17 +4,19 @@ import { Heading, HStack, Box, VStack, Text, StackDivider } from '@chakra-ui/rea
 
 function TodoList({ todoList, checkTodo }) {
 
-    
+        
     if (!todoList.length) {
         return (
             <>
                 <Box maxW='80%'>
                     <Heading
                         p='5'
-                        as='h6'
+                        as='p'
                         fontWeight='extrabold'
                         size='xl'
                         bgClip='text'
+                        color='gray.500'
+                        fontSize='md'
                     >
                         Your list is empty
                     </Heading>
@@ -49,6 +51,8 @@ function TodoList({ todoList, checkTodo }) {
                             onClick={() => checkTodo(Todo.id)}>
                             {Todo.body}
                         </Text>
+
+                      
 
                     </HStack>
                 ))}

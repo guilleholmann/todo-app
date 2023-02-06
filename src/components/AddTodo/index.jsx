@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { HStack, Input, useToast } from "@chakra-ui/react";
+import { HStack, Input, useToast, Button } from "@chakra-ui/react";
 import { nanoid } from 'nanoid';
 
 function AddTodo({ addTodo }) {
@@ -7,7 +7,7 @@ function AddTodo({ addTodo }) {
     const [content, setContent] = useState('');
     const [statusInput, setStatusInput] = useState(true);
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault();
 
         const todoText = content.trim();
@@ -21,7 +21,7 @@ function AddTodo({ addTodo }) {
                 isClosable: true,
             });
             setStatusInput(false);
-            
+
             return setContent('');
         }
 
@@ -30,7 +30,7 @@ function AddTodo({ addTodo }) {
             body: todoText,
             check: false
         };
-        
+
         addTodo(todo);
         setContent('');
     }
@@ -50,7 +50,15 @@ function AddTodo({ addTodo }) {
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                 />
-               
+                <Button
+                    colorScheme='blue'
+                    px='8'
+                    pl='10'
+                    pr='10'
+                    h='46'
+                    type='submit'>Add
+                </Button>
+
             </HStack>
         </form>
     );
