@@ -3,8 +3,8 @@ import { Heading, IconButton, VStack, useColorMode, Spinner, Stack } from "@chak
 import { FaSun, FaMoon } from 'react-icons/fa'
 import { useState, useEffect } from 'react'
 import AddTodo from './components/AddTodo';
-import TodoList from "./components/TodoList";
-
+import TodoList from './components/TodoList';
+import FilterTodos from './components/FilterTodos'
 
 import './App.css'
 import {
@@ -20,6 +20,7 @@ function App() {
 
   const [todoList, setTodoList] = useState([]);
   const [loading, setLoading] = useState(false); //  to handle spinner hide show
+  const [filteredTodos, setFilteredTodos] =  useState([]);
 
   useEffect(() => {
 
@@ -33,6 +34,9 @@ function App() {
       });
 
       setTodoList(todosArray);
+      setFilteredTodos(todosArray);
+
+
       setLoading(false);
     });
     return () => unsub();
@@ -46,6 +50,27 @@ function App() {
   const addTodo = (todo) => {
     setTodoList([...todoList, todo]);
   }
+
+  const handleFilterChange = (filter) => {
+ 
+
+    switch(filter) {
+      case 'all': 
+        setFilteredTodos([...todoList]) ;
+        break;
+      case 'active': 
+        const filterByActive = todoList.filter(item => !item.check)
+        setFilteredTodos([...filterByActive]);
+        break;
+      case 'completed': 
+      const filterByCompleted = todoList.filter(item => item.check)
+        setFilteredTodos([...filterByCompleted]) ;  
+       
+        break;
+    }
+   
+  }
+
 
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -80,7 +105,10 @@ function App() {
         </Stack>
       )}
       {!loading && (
-        <TodoList todoList={todoList} checkTodo={checkTodo} />
+        <>
+        <FilterTodos handleFilterChange={handleFilterChange}/>
+        <TodoList todoList={filteredTodos} checkTodo={checkTodo} />
+        </>
       )}
 
 
