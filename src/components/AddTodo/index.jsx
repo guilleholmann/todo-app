@@ -2,12 +2,16 @@ import { useState } from 'react'
 import { HStack, Input, useToast, Button } from "@chakra-ui/react";
 import { nanoid } from 'nanoid';
 
+import { db } from "../../firebase";
+import { collection, addDoc } from "firebase/firestore";
+
+
 function AddTodo({ addTodo }) {
     const toast = useToast();
     const [content, setContent] = useState('');
     const [statusInput, setStatusInput] = useState(true);
 
-    function handleSubmit(e) {
+    const handleSubmit = async(e) => {
         e.preventDefault();
 
         const todoText = content.trim();
@@ -31,6 +35,10 @@ function AddTodo({ addTodo }) {
             check: false
         };
 
+        await addDoc(collection(db, "todos"), {
+            ...todo
+          });
+
         addTodo(todo);
         setContent('');
     }
@@ -38,6 +46,7 @@ function AddTodo({ addTodo }) {
     if (content && !statusInput) {
         setStatusInput(true);
     }
+    
 
     return (
         <form onSubmit={handleSubmit}>

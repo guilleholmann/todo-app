@@ -4,7 +4,7 @@ import { Heading, HStack, Box, VStack, Text, StackDivider } from '@chakra-ui/rea
 
 function TodoList({ todoList, checkTodo }) {
 
-        
+   
     if (!todoList.length) {
         return (
             <>
@@ -37,22 +37,22 @@ function TodoList({ todoList, checkTodo }) {
                 alignItems='stretch'
             >
 
-                {todoList.map((Todo) => (
+                {todoList.map((todo) => (
                     <HStack
-                        key={Todo.id}
-                        opacity={Todo.check == true ? '0.2' : '1'}
+                        key={todo.id}
+                        opacity={todo.check == true ? '0.2' : '1'}
                     >
                         <Text
                             w='100%'
                             p='8px'
                             borderRadius='lg'
-                            as={Todo.check == true ? 's' : ''}
+                            as={todo.check == true ? 's' : ''}
                             cursor='pointer'
-                            onClick={() => checkTodo(Todo.id)}>
-                            {Todo.body}
+                            onClick={() => checkTodo(todo)}>
+                            {todo.body}
                         </Text>
 
-                      
+
 
                     </HStack>
                 ))}
