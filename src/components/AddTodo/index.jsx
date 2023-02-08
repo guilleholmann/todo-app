@@ -37,10 +37,14 @@ function AddTodo({ addTodo }) {
 
         await addDoc(collection(db, "todos"), {
             ...todo
-          });
-
-        addTodo(todo);
-        setContent('');
+          })
+          .then(()=>{
+            addTodo(todo);
+            setContent('');
+          })
+          .catch ((error)=> {
+            console.log(error)
+          });       
     }
 
     if (content && !statusInput) {

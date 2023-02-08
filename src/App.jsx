@@ -45,8 +45,14 @@ function App() {
 
 
   const checkTodo = async (todo) => {  
-    await updateDoc(doc(db, "todos", todo.id), { check: !todo.check });
-    setFilterSelected('all');
+    await updateDoc(doc(db, "todos", todo.id), { check: !todo.check })
+    .then(()=>{
+      setFilterSelected('all');
+    })
+    .catch ((error)=> {
+      console.log(error)
+    });  
+
   }
 
   const addTodo = (todo) => {

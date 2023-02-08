@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, HStack, Box, VStack, Text, StackDivider } from '@chakra-ui/react'
+import { Heading, HStack, Box, VStack, StackDivider, Checkbox , Button, Flex, Text} from '@chakra-ui/react'
 
 
 function TodoList({ todoList, checkTodo }) {
@@ -40,24 +40,33 @@ function TodoList({ todoList, checkTodo }) {
                 {todoList.map((todo) => (
                     <HStack
                         key={todo.id}
-                        opacity={todo.check == true ? '0.2' : '1'}
+                        opacity={todo.check == true ? '0.5' : '1'}
                     >
-                        <Text
-                            w='100%'
-                            p='8px'
-                            borderRadius='lg'
-                            as={todo.check == true ? 's' : ''}
-                            cursor='pointer'
-                            onClick={() => checkTodo(todo)}>
-                            {todo.body}
-                        </Text>
-
-
-
+                        <Checkbox colorScheme='blue' onChange={() => checkTodo(todo)} isChecked={todo.check}  as={todo.check == true ? 's' : ''}>
+                           {todo.body}
+                        </Checkbox>
                     </HStack>
                 ))}
             </VStack>
+           
+            {/* <Text>
+                2 remaining 
+            </Text> */}
+                
+                   
+            <Flex>
+                <Button
+                    colorScheme='gray'
+                    px='8'
+                    color='gray.500'
+                    mt='8'
+                    size='sm'
+                    // onClick={onOpen}
+                    >
+                    Clear Completed
+                </Button>
 
+            </Flex>        
                       
         </>
     );
