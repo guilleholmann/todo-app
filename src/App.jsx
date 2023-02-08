@@ -21,6 +21,7 @@ function App() {
   const [todoList, setTodoList] = useState([]);
   const [loading, setLoading] = useState(false); //  to handle spinner hide show
   const [filteredTodos, setFilteredTodos] =  useState([]);
+  const [filterSelected, setFilterSelected] = useState('all');
 
   useEffect(() => {
 
@@ -45,32 +46,39 @@ function App() {
 
   const checkTodo = async (todo) => {  
     await updateDoc(doc(db, "todos", todo.id), { check: !todo.check });
+    setFilterSelected('all');
   }
 
   const addTodo = (todo) => {
     setTodoList([...todoList, todo]);
+    setFilteredTodos([...todoList, todo]);
+    setFilterSelected('all');
+   
   }
 
   const handleFilterChange = (filter) => {
  
+    let filteredItems = [];
 
     switch(filter) {
       case 'all': 
-        setFilteredTodos([...todoList]) ;
+        filteredItems = [...todoList];
         break;
       case 'active': 
-        const filterByActive = todoList.filter(item => !item.check)
-        setFilteredTodos([...filterByActive]);
+      filteredItems = [...todoList.filter(item => !item.check)];
         break;
       case 'completed': 
-      const filterByCompleted = todoList.filter(item => item.check)
-        setFilteredTodos([...filterByCompleted]) ;  
-       
+      filteredItems = [...todoList.filter(item => item.check)];
         break;
+      default:
+        filteredItems = [...todoList];
     }
+    setFilterSelected(filter);
+    setFilteredTodos(filteredItems) ; 
    
   }
 
+  
 
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -90,10 +98,10 @@ function App() {
         as='h1'
         fontWeight='extrabold'
         size='xl'
-
+        bgGradient="linear(to-l, #7928CA,#FF0080)"
         bgClip='text'
         justifyContent="flex-start"
-        color="blue.300"
+       fontSize="6xl"    
       >
         TODO
       </Heading>
@@ -104,10 +112,11 @@ function App() {
           <Spinner size='xl' />
         </Stack>
       )}
+     
       {!loading && (
         <>
-        <FilterTodos handleFilterChange={handleFilterChange}/>
-        <TodoList todoList={filteredTodos} checkTodo={checkTodo} />
+          <FilterTodos handleFilterChange={handleFilterChange} filterSelected={filterSelected}/> 
+          <TodoList todoList={filteredTodos} checkTodo={checkTodo} />
         </>
       )}
 

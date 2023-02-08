@@ -1,19 +1,19 @@
-import React from "react";
+import React  from "react";
+
 import {
-    
-     ListItem,
-    
-     UnorderedList,
+     Link,
+     Flex
 } from "@chakra-ui/react";
 
 
-function filterTodos({ handleFilterChange }) {
+function filterTodos({ handleFilterChange, filterSelected }) {
+   
     return (       
-        <UnorderedList>
-            <ListItem cursor="pointer" onClick={() => handleFilterChange('all')}>All</ListItem>
-            <ListItem cursor="pointer" onClick={() => handleFilterChange('active')}>Active</ListItem>
-            <ListItem cursor="pointer" onClick={() => handleFilterChange('completed')}>Completed</ListItem>
-        </UnorderedList>
+        <Flex>
+            <Link cursor="pointer" color={filterSelected ==='all' ? 'purple' : ''} m='3' onClick={() => handleFilterChange('all')}>All</Link>
+            <Link cursor="pointer" color={filterSelected ==='active' ? 'purple' : ''} m='3' onClick={() => handleFilterChange('active')}>Active</Link>
+            <Link cursor="pointer" color={filterSelected ==='completed' ? 'purple' : ''} m='3' onClick={() => handleFilterChange('completed')}>Completed</Link>
+        </Flex>
     );
 }
 
