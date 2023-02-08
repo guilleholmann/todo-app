@@ -10,7 +10,8 @@ function filterTodos({ handleFilterChange, filterSelected }) {
              <Tooltip label="All Tasks" aria-label='Filter All Tasks'>
                 <Link 
                     cursor="pointer" 
-                    color={filterSelected ==='all' ? 'purple' : ''}
+                    color={filterSelected ==='all' ? 'pink.400' : ''}
+                    colorScheme='blue'
                     m='3' 
                     onClick={() => handleFilterChange('all')}>                
                     All
@@ -19,7 +20,7 @@ function filterTodos({ handleFilterChange, filterSelected }) {
             <Tooltip label="Filter Active Tasks" aria-label='Filter Active Tasks'>
                 <Link 
                     cursor="pointer"
-                    color={filterSelected ==='active' ? 'purple' : ''}
+                    color={filterSelected ==='active' ? 'pink.400' : ''}
                     m='3'
                     onClick={() => handleFilterChange('active')}>
                         Active
@@ -28,7 +29,7 @@ function filterTodos({ handleFilterChange, filterSelected }) {
             <Tooltip label="Filter Completed Tasks" aria-label='Filter Completed Tasks'>
                 <Link 
                     cursor="pointer"
-                    color={filterSelected ==='completed' ? 'purple' : ''}
+                    color={filterSelected ==='completed' ? 'pink.400' : ''}
                     m='3'
                     onClick={() => handleFilterChange('completed')}>
                         Completed
