@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { HStack, Input, useToast, Button } from "@chakra-ui/react";
+import { HStack, Input, useToast, Button, Tooltip } from "@chakra-ui/react";
 import { nanoid } from 'nanoid';
 
 import { db } from "../../firebase";
@@ -11,7 +11,7 @@ function AddTodo({ addTodo }) {
     const [content, setContent] = useState('');
     const [statusInput, setStatusInput] = useState(true);
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const todoText = content.trim();
@@ -37,20 +37,20 @@ function AddTodo({ addTodo }) {
 
         await addDoc(collection(db, "todos"), {
             ...todo
-          })
-          .then(()=>{
-            addTodo(todo);
-            setContent('');
-          })
-          .catch ((error)=> {
-            console.log(error)
-          });       
+        })
+            .then(() => {
+                addTodo(todo);
+                setContent('');
+            })
+            .catch((error) => {
+                console.log(error)
+            });
     }
 
     if (content && !statusInput) {
         setStatusInput(true);
     }
-    
+
 
     return (
         <form onSubmit={handleSubmit}>
@@ -63,14 +63,18 @@ function AddTodo({ addTodo }) {
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                 />
-                <Button
-                    colorScheme='blue'
-                    px='8'
-                    pl='10'
-                    pr='10'
-                    h='46'
-                    type='submit'>Add
-                </Button>
+
+                <Tooltip label="Add new task" aria-label='Add new task'>
+                    <Button
+                        colorScheme='blue'
+                        px='8'
+                        pl='10'
+                        pr='10'
+                        h='46'
+                        type='submit'>Add
+                    </Button>
+                </Tooltip>
+
 
             </HStack>
         </form>

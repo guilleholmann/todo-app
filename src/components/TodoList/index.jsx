@@ -42,6 +42,7 @@ function TodoList({ todoList, checkTodo }) {
                         key={todo.id}
                         opacity={todo.check == true ? '0.5' : '1'}
                     >
+                        
                         <Checkbox colorScheme='blue' onChange={() => checkTodo(todo)} isChecked={todo.check}  as={todo.check == true ? 's' : ''}>
                            {todo.body}
                         </Checkbox>
