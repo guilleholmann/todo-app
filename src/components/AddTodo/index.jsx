@@ -38,13 +38,10 @@ function AddTodo({ addTodo }) {
         await addDoc(collection(db, "todos"), {
             ...todo
         })
-            .then(() => {
-                addTodo(todo);
-                setContent('');
-            })
-            .catch((error) => {
-                console.log(error)
-            });
+
+        addTodo(todo);
+        setContent('');
+
     }
 
     if (content && !statusInput) {

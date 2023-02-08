@@ -2,10 +2,10 @@ import React from 'react'
 import { Heading, HStack, Box, VStack, StackDivider, Checkbox , Button, Flex, Text} from '@chakra-ui/react'
 
 
-function TodoList({ todoList, checkTodo }) {
+function TodoList({ todoList, checkTodo, deleteCompleted }) {
 
    
-    if (!todoList.length) {
+    if (!todoList?.length) {
         return (
             <>
                 <Box maxW='80%'>
@@ -51,7 +51,7 @@ function TodoList({ todoList, checkTodo }) {
             </VStack>
            
             {/* <Text>
-                2 remaining 
+               {`${remainingCounter} remaining`}
             </Text> */}
                 
                    
@@ -62,7 +62,7 @@ function TodoList({ todoList, checkTodo }) {
                     color='gray.500'
                     mt='8'
                     size='sm'
-                    // onClick={onOpen}
+                    onClick={deleteCompleted}
                     >
                     Clear Completed
                 </Button>

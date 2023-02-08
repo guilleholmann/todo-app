@@ -12,6 +12,7 @@ import {
   query,
   onSnapshot,
   updateDoc,
+  deleteDoc,
   doc,
 } from "firebase/firestore";
 import { db } from "./firebase";
@@ -45,13 +46,10 @@ function App() {
 
 
   const checkTodo = async (todo) => {
-    await updateDoc(doc(db, "todos", todo.id), { check: !todo.check })
-      .then(() => {
-        setFilterSelected('all');
-      })
-      .catch((error) => {
-        console.log(error)
-      });
+    await updateDoc(doc(db, "todos", todo.id), { check: !todo.check });
+    setFilterSelected('all');
+     
+     
 
   }
 
@@ -84,6 +82,16 @@ function App() {
 
   }
 
+  const deleteCompleted = () => {
+
+    const completedItems = (todoList.filter(item => item.check));
+
+    completedItems.map(async (todo) => {
+      await deleteDoc(doc(db, "todos", todo.id));
+    })
+    
+  }
+
 
 
   const { colorMode, toggleColorMode } = useColorMode();
@@ -102,7 +110,7 @@ function App() {
       </Tooltip>
 
 
-      <Link href='/' style={{ textDecoration: 'none' }}> 
+      <Link href='/todo-app/' style={{ textDecoration: 'none' }}> 
         <Heading
           p='5'
           as='h1'
@@ -127,7 +135,7 @@ function App() {
       {!loading && (
         <>
           <FilterTodos handleFilterChange={handleFilterChange} filterSelected={filterSelected} />
-          <TodoList todoList={filteredTodos} checkTodo={checkTodo} />
+          <TodoList todoList={filteredTodos} checkTodo={checkTodo} deleteCompleted={deleteCompleted} />
         </>
       )}
 
