@@ -8,10 +8,12 @@ We've used Vite because it is faster than Create React App. It's easy to configu
 - [Firebase](https://firebase.google.com/?hl=es)
 - [React Icons](https://www.npmjs.com/package/react-icons)
 
-## Getting Started
+## Getting Started Locally
 - Clone this repo
 - Go to the project directory
 - Run: `npm install`
+- You need to connect your Firebase configuration to the file `src/firebase-local.jsx`. You have an example in `src/firebase.jsx`.
+- `npm run dev`
 
 ## Available Scripts
 

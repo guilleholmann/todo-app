@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { HStack, Input, useToast, Button, Tooltip } from "@chakra-ui/react";
 import { nanoid } from 'nanoid';
 
-import { db } from "../../firebase";
+import { db } from "../../firebase-local";
 import { collection, addDoc } from "firebase/firestore";
 
 

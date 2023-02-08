@@ -43,7 +43,15 @@ function TodoList({ filteredTodos, checkTodo, deleteCompleted, todoList}) {
                         opacity={todo.check == true ? '0.5' : '1'}
                     >
                         
-                        <Checkbox colorScheme='blue' onChange={() => checkTodo(todo)} isChecked={todo.check}  as={todo.check == true ? 's' : ''}>
+                        <Checkbox 
+                        colorScheme='blue'
+                        onChange={() => checkTodo(todo)}
+                        isChecked={todo.check} 
+                        as={todo.check == true ? 's' : ''}
+                        css={`
+                            > span:first-of-type {
+                            box-shadow: unset;
+                            }`}>
                            {todo.body}
                         </Checkbox>
                     </HStack>
