@@ -15,7 +15,7 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import { db } from "./firebase";
+import { db } from "./firebase-local";
 
 function App() {
 
@@ -82,12 +82,8 @@ function App() {
   const deleteCompleted = () => {
 
     const completedItems = (todoList.filter(item => item.check));
-
-    Promise.all(
-      completedItems.map(async (todo) => {
-        await deleteDoc(doc(db, "todos", todo.id));
-      })
-    );
+    const promiseList = completedItems.map(todo => deleteDoc(doc(db, "todos", todo.id)));
+    Promise.all(promiseList);
     
   }
 
