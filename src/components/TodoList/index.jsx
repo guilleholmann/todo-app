@@ -2,10 +2,10 @@ import React from 'react'
 import { Heading, HStack, Box, VStack, StackDivider, Checkbox , Button, Flex, Text} from '@chakra-ui/react'
 
 
-function TodoList({ todoList, checkTodo, deleteCompleted }) {
+function TodoList({ filteredTodos, checkTodo, deleteCompleted, todoList}) {
 
    
-    if (!todoList?.length) {
+    if (!filteredTodos?.length) {
         return (
             <>
                 <Box maxW='80%'>
@@ -37,7 +37,7 @@ function TodoList({ todoList, checkTodo, deleteCompleted }) {
                 alignItems='stretch'
             >
 
-                {todoList.map((todo) => (
+                {filteredTodos.map((todo) => (
                     <HStack
                         key={todo.id}
                         opacity={todo.check == true ? '0.5' : '1'}
@@ -50,9 +50,9 @@ function TodoList({ todoList, checkTodo, deleteCompleted }) {
                 ))}
             </VStack>
            
-            {/* <Text>
-               {`${remainingCounter} remaining`}
-            </Text> */}
+            <Text>
+               {`${todoList?.filter(item => !item.check).length} remaining`}
+            </Text>
                 
                    
             <Flex>

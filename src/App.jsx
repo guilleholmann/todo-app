@@ -48,9 +48,6 @@ function App() {
   const checkTodo = async (todo) => {
     await updateDoc(doc(db, "todos", todo.id), { check: !todo.check });
     setFilterSelected('all');
-     
-     
-
   }
 
   const addTodo = (todo) => {
@@ -86,9 +83,11 @@ function App() {
 
     const completedItems = (todoList.filter(item => item.check));
 
-    completedItems.map(async (todo) => {
-      await deleteDoc(doc(db, "todos", todo.id));
-    })
+    Promise.all(
+      completedItems.map(async (todo) => {
+        await deleteDoc(doc(db, "todos", todo.id));
+      })
+    );
     
   }
 
@@ -135,7 +134,7 @@ function App() {
       {!loading && (
         <>
           <FilterTodos handleFilterChange={handleFilterChange} filterSelected={filterSelected} />
-          <TodoList todoList={filteredTodos} checkTodo={checkTodo} deleteCompleted={deleteCompleted} />
+          <TodoList filteredTodos={filteredTodos} checkTodo={checkTodo} deleteCompleted={deleteCompleted} todoList={todoList} />
         </>
       )}
 
