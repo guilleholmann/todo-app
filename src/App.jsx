@@ -6,7 +6,6 @@ import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
 import FilterTodos from './components/FilterTodos'
 
-import './App.css'
 import {
   collection,
   query,
@@ -50,12 +49,6 @@ function App() {
     setFilterSelected('all');
   }
 
-  const addTodo = (todo) => {
-    setTodoList([...todoList, todo]);
-    setFilteredTodos([...todoList, todo]);
-    setFilterSelected('all');
-
-  }
 
   const handleFilterChange = (filter) => {
 
@@ -119,7 +112,7 @@ function App() {
           TODO
         </Heading>
       </Link>
-      <AddTodo addTodo={addTodo} />
+      <AddTodo  />
 
       {loading && (
         <Stack direction='row' spacing={4}>

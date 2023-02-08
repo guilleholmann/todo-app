@@ -1,12 +1,11 @@
 import { useState } from 'react'
 import { HStack, Input, useToast, Button, Tooltip } from "@chakra-ui/react";
-import { nanoid } from 'nanoid';
 
 import { db } from "../../firebase-local";
 import { collection, addDoc } from "firebase/firestore";
 
 
-function AddTodo({ addTodo }) {
+function AddTodo() {
     const toast = useToast();
     const [content, setContent] = useState('');
     const [statusInput, setStatusInput] = useState(true);
@@ -30,20 +29,16 @@ function AddTodo({ addTodo }) {
         }
 
         const todo = {
-            id: nanoid(),
             body: todoText,
             check: false
         };
 
-        await addDoc(collection(db, "todos"), {
+        addDoc(collection(db, "todos"), {
             ...todo
-        })
-
-        addTodo(todo);
-        setContent('');
-
+        }).then(()=>{
+            setContent('');
+        });
     }
-
     if (content && !statusInput) {
         setStatusInput(true);
     }
